@@ -53,7 +53,7 @@ export function GuidesSection({ t, lang }) {
               <h3 className="guides-card__title playfair">{card.title}</h3>
               <div className="guides-card__excerpt">{card.excerpt}</div>
               <span className="guides-card__meta">
-                {card.readMin} {copy.minRead || "min"} · {copy.readMore || "Leer guía"} →
+                {card.readMin} {copy.minRead || "min"} · {copy.readMore || "Ver guía"} →
               </span>
             </Link>
           ))}

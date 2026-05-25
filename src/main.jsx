@@ -20,6 +20,9 @@ import { installSafariReaderShortcutBlock } from './lib/block-safari-reader-shor
 
 installSafariReaderShortcutBlock()
 
+/** Quitar HTML SEO estático antes de pintar (Safari Vista lector lo detecta al instante). */
+document.getElementById('seo-prerender')?.remove()
+
 const rootEl = document.getElementById('root')
 if (!rootEl) {
   document.body.innerHTML = '<p style="font-family:sans-serif;padding:24px">Missing #root element.</p>'

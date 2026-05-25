@@ -1,4 +1,6 @@
 /** SEO blog / guide articles — market-adapted per locale. */
+import { buildLocalizedPath } from "./seo-locales.js";
+
 const SITE_ORIGIN = "https://mallorcaislandyacht.com";
 
 export const SEO_BLOG_PATHS = [
@@ -939,25 +941,26 @@ export function isBlogPath(pathname) {
   return SEO_BLOG_PATHS.includes(key);
 }
 
-/** Article JSON-LD for blog posts. */
+/** WebPage JSON-LD for guides (evita @type Article que activa Safari Vista lector). */
 export function buildBlogArticleJsonLd(path, lang = "es") {
   const meta = getBlogArticleMeta(path, lang);
   const article = getBlogArticle(path, lang);
   if (!meta || !article) return null;
-  const url = `${SITE_ORIGIN}${path}`;
+  const localized = buildLocalizedPath(path, lang);
+  const url = `${SITE_ORIGIN}${localized === "/" ? "" : localized}`;
   return {
-    "@type": "Article",
-    headline: article.h1,
+    "@type": "WebPage",
+    name: article.h1,
     description: meta.description,
     datePublished: article.published,
     dateModified: article.published,
-    author: { "@type": "Organization", name: "Mallorca Island Yacht" },
+    url,
+    isPartOf: { "@type": "WebSite", name: "Mallorca Island Yacht", url: SITE_ORIGIN },
     publisher: {
       "@type": "Organization",
       name: "Mallorca Island Yacht",
       logo: { "@type": "ImageObject", url: `${SITE_ORIGIN}/icon-master.png` },
     },
-    mainEntityOfPage: url,
     image: `${SITE_ORIGIN}/71A7AFB6-CBFC-41D5-885B-D1040C3437E3.webp`,
   };
 }

@@ -680,5 +680,8 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:rgba(11,31,58,
 
 /* Safari Vista lector: menos señales de “artículo” (evitar <p> largos y h1+h2 tipo editorial) */
 .site-public .site-text{display:block;margin:0}
+.site-text__chunk{display:inline}
+.blog-article__list-item{position:relative}
+.blog-article__bullet{font-weight:700;color:rgba(11,31,58,.55)}
 .site-hero-tagline{font-style:italic}
 .site-firestore-alert code{font-size:11px;word-break:break-all}

@@ -303,7 +303,7 @@ const T = {
       title:"Todo sobre alquiler de barco en Mallorca",
       sub:"Consejos, precios, calas y planificación del verano 2026",
       featured:"Destacado",
-      readMore:"Leer guía",
+      readMore:"Ver guía",
       minRead:"min",
     },
     faq:{

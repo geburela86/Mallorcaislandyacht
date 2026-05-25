@@ -20,6 +20,17 @@
         min-height: 100svh;
         background-color: #eaf4ff;
       }
+      /* Evita que Safari Vista lector lea el HTML prerender antes de React */
+      #seo-prerender {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        overflow: hidden !important;
+        position: absolute !important;
+        width: 1px !important;
+        clip: rect(0, 0, 0, 0) !important;
+        pointer-events: none !important;
+      }
       html.site-boot-ready .fade-up,
       html.site-boot-ready .fade-up-1,
       html.site-boot-ready .fade-up-2,

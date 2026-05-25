@@ -34,9 +34,10 @@ export function BlogArticlePage({ articlePath, lang, onBook, guidesHomeTo = "/" 
   const { ui } = article;
 
   return (
-    <div className="public-site-section blog-article">
-      <div style={{ maxWidth: 720, margin: "0 auto" }}>
+    <div className="public-site-section blog-article" data-safari-reader="off">
+      <div className="blog-article__inner" style={{ maxWidth: 720, margin: "0 auto" }}>
         <nav
+          className="blog-article__nav"
           aria-label="Breadcrumb"
           style={{
             fontSize: 11,
@@ -60,8 +61,9 @@ export function BlogArticlePage({ articlePath, lang, onBook, guidesHomeTo = "/" 
           </Link>
         </nav>
 
-        <header style={{ marginBottom: 40, textAlign: "center" }}>
+        <div className="blog-article__header" style={{ marginBottom: 40, textAlign: "center" }}>
           <div
+            className="blog-article__kicker"
             style={{
               fontSize: 10,
               letterSpacing: ".35em",
@@ -73,7 +75,7 @@ export function BlogArticlePage({ articlePath, lang, onBook, guidesHomeTo = "/" 
           >
             · {article.kicker} ·
           </div>
-          <div className="playfair blog-article__title" style={titleStyle} role="heading" aria-level={1}>
+          <div className="playfair blog-article__title" style={titleStyle}>
             {article.h1}
           </div>
           <SiteText
@@ -87,34 +89,39 @@ export function BlogArticlePage({ articlePath, lang, onBook, guidesHomeTo = "/" 
             {ui.updated} {article.published} · {article.readMin} {ui.readMin}
           </SiteText>
           <div className="gold-line" style={{ maxWidth: 280, margin: "20px auto 0" }} />
-        </header>
+        </div>
 
         <div className="blog-article-body" style={{ fontSize: 15, lineHeight: 1.8, color: "rgba(11,31,58,.82)" }}>
           {article.sections.map((sec, i) => (
-            <section key={i} style={{ marginBottom: 32 }}>
-              <div className="playfair blog-article__section-title" style={sectionTitleStyle} role="heading" aria-level={2}>
+            <div key={i} className="blog-article__block" style={{ marginBottom: 32 }}>
+              <div className="playfair blog-article__section-title" style={sectionTitleStyle}>
                 {sec.h2}
               </div>
               {sec.paragraphs?.map((p, j) => (
-                <SiteText key={j} style={{ margin: "0 0 14px" }}>
+                <SiteText key={j} readerSafe style={{ margin: "0 0 14px" }}>
                   {p}
                 </SiteText>
               ))}
               {sec.list?.length ? (
-                <ul style={{ margin: "0 0 14px", paddingLeft: 22 }}>
+                <div className="blog-article__list" style={{ margin: "0 0 14px" }}>
                   {sec.list.map((item, k) => (
-                    <li key={k} style={{ marginBottom: 8 }}>
-                      {item}
-                    </li>
+                    <SiteText
+                      key={k}
+                      className="blog-article__list-item"
+                      readerSafe
+                      style={{ marginBottom: 8, paddingLeft: 14 }}
+                    >
+                      {`· ${item}`}
+                    </SiteText>
                   ))}
-                </ul>
+                </div>
               ) : null}
-            </section>
+            </div>
           ))}
         </div>
 
         <div
-          className="surface"
+          className="surface blog-article__cta"
           style={{
             marginTop: 48,
             marginBottom: 40,
@@ -123,10 +130,10 @@ export function BlogArticlePage({ articlePath, lang, onBook, guidesHomeTo = "/" 
             textAlign: "center",
           }}
         >
-          <div className="playfair" style={{ fontSize: "1.5rem", fontWeight: 600, marginBottom: 10 }} role="heading" aria-level={2}>
+          <div className="playfair blog-article__cta-title" style={{ fontSize: "1.5rem", fontWeight: 600, marginBottom: 10 }}>
             {ui.ctaTitle}
           </div>
-          <SiteText className="cormorant" style={{ fontSize: "1.1rem", color: "rgba(11,31,58,.72)", marginBottom: 22 }}>
+          <SiteText className="cormorant" readerSafe style={{ fontSize: "1.1rem", color: "rgba(11,31,58,.72)", marginBottom: 22 }}>
             {ui.ctaSub}
           </SiteText>
           <button type="button" onClick={onBook} className="btn-gold" style={{ fontSize: 13, padding: "14px 36px" }}>
@@ -135,7 +142,7 @@ export function BlogArticlePage({ articlePath, lang, onBook, guidesHomeTo = "/" 
         </div>
 
         {article.related?.length > 0 ? (
-          <nav aria-label={ui.related} style={{ marginBottom: 24 }}>
+          <nav className="blog-article__related" aria-label={ui.related} style={{ marginBottom: 24 }}>
             <SiteText
               style={{
                 fontSize: 10,

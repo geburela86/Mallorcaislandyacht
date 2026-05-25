@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
-import { getBlogArticle, isBlogPath } from "../src/lib/seo-blog.js";
+import { getBlogArticle, getBlogArticleMeta, isBlogPath } from "../src/lib/seo-blog.js";
 import {
   SITE_ORIGIN,
   SEO_SITEMAP_ROUTES,
@@ -67,25 +67,14 @@ function buildFaqHtml(lang) {
     .join("\n");
 }
 
+/** Solo título para crawlers; el cuerpo largo activa Safari Vista lector antes de hidratar React. */
 function buildBlogStaticMain(routePath, lang) {
   const article = getBlogArticle(routePath, lang);
   if (!article) return null;
-  const sections = (article.sections || [])
-    .map((sec) => {
-      const paras = (sec.paragraphs || [])
-        .map((p) => `      <div class="site-text">${escapeHtml(p)}</div>`)
-        .join("\n");
-      const list = sec.list?.length
-        ? `<ul>${sec.list.map((li) => `<li>${escapeHtml(li)}</li>`).join("")}</ul>`
-        : "";
-      return `    <section>\n      <div class="blog-prerender__h">${escapeHtml(sec.h2)}</div>\n${paras}${list}\n    </section>`;
-    })
-    .join("\n");
-  return `<main id="seo-prerender" lang="${lang}">
-  <div class="blog-prerender">
-    <div class="blog-prerender__title">${escapeHtml(article.h1)}</div>
-${sections}
-  </div>
+  const meta = getBlogArticleMeta(routePath, lang);
+  const desc = meta?.description ? escapeHtml(meta.description) : "";
+  return `<main id="seo-prerender" hidden aria-hidden="true" lang="${lang}">
+  <div class="blog-prerender">${desc ? `<div>${desc}</div>` : ""}<div class="blog-prerender__title">${escapeHtml(article.h1)}</div></div>
 </main>`;
 }
 
@@ -138,10 +127,18 @@ function patchHtml(template, basePath, lang) {
   html = replaceJsonLd(html, jsonLd);
 
   const staticMain = buildStaticMain(basePath, lang);
+  const stripPrerender =
+    '<script>document.getElementById("seo-prerender")?.remove();</script>';
   if (html.includes('id="seo-prerender"')) {
     html = html.replace(/<main id="seo-prerender"[\s\S]*?<\/main>/, staticMain);
   } else {
-    html = html.replace("<div id=\"root\"></div>", `${staticMain}\n    <div id="root"></div>`);
+    html = html.replace(
+      "<div id=\"root\"></div>",
+      `${staticMain}\n${stripPrerender}\n    <div id="root"></div>`,
+    );
+  }
+  if (staticMain && !html.includes(stripPrerender)) {
+    html = html.replace(staticMain, `${staticMain}\n${stripPrerender}`);
   }
 
   return html;
