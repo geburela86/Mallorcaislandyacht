@@ -1,3 +1,4 @@
 :root{font-synthesis:none;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-body{margin:0}
-#root{min-height:100svh;overflow-anchor:none}
+html{background:#eaf4ff}
+body{margin:0;background:#eaf4ff}
+#root{min-height:100svh;overflow-anchor:none;background:#eaf4ff}

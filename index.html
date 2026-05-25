@@ -2,6 +2,45 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
+    <meta name="theme-color" content="#eaf4ff" />
+    <meta name="color-scheme" content="light" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        background-color: #eaf4ff;
+        color: rgba(11, 31, 58, 0.96);
+      }
+      body {
+        min-height: 100vh;
+        min-height: 100svh;
+      }
+      #root {
+        min-height: 100vh;
+        min-height: 100svh;
+        background-color: #eaf4ff;
+      }
+      html.site-boot-ready .fade-up,
+      html.site-boot-ready .fade-up-1,
+      html.site-boot-ready .fade-up-2,
+      html.site-boot-ready .fade-up-3,
+      html.site-boot-ready .fade-in {
+        animation: none;
+        opacity: 1;
+        transform: none;
+      }
+    </style>
+    <script>
+      try {
+        var raw = sessionStorage.getItem("miy_site_public_boot_v1");
+        if (raw) {
+          var o = JSON.parse(raw);
+          if (o && o.boats && o.boats.length) {
+            document.documentElement.classList.add("site-boot-ready");
+          }
+        }
+      } catch (e) {}
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=8" />
     <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png?v=8" />
     <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png?v=8" />
@@ -74,7 +113,7 @@
     <link rel="preload" as="image" href="/2025-02-09-15-43-10-400.webp" type="image/webp" />
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root" style="background-color:#eaf4ff;min-height:100svh"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
