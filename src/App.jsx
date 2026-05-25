@@ -293,7 +293,7 @@ const T = {
     hero:{
       kicker:"Chárter privado en Palma",
       title:"Alquiler de Barcos en Palma de Mallorca",
-      sub:"Yates, veleros y embarcaciones privadas. Reserva flexible con patrón profesional incluido.",
+      sub:"Embarcaciones privadas. Reserva flexible con patrón profesional incluido.",
       cta:"Reserva tu Chárter",cta2:"Ver Flota",
       offer:"✦  Oferta Especial — 25% dto. todas las reservas de junio  ✦",scroll:"Explorar"
     },
