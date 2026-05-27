@@ -7,6 +7,7 @@
     "dev": "vite",
     "media:index": "node scripts/build-site-media-index.mjs",
     "routes:photos": "node scripts/download-route-photos.mjs",
+    "routes:photos:gmaps": "node scripts/fetch-gmaps-route-photos.mjs",
     "media:webp": "node scripts/convert-public-to-webp.mjs && npm run media:index",
     "seo:generate": "node scripts/generate-sitemap.mjs",
     "build": "vite build && node scripts/build-site-media-index.mjs --dist && node scripts/generate-sitemap.mjs --dist && node scripts/prerender-seo-routes.mjs --dist",
