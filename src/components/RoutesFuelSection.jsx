@@ -1,6 +1,18 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ROUTES_FUEL_ITEMS } from "../lib/routes-fuel-data.js";
+import { ROUTE_IMAGE_FALLBACK, ROUTES_FUEL_ITEMS, routePhotoSrc } from "../lib/routes-fuel-data.js";
 import { SiteText } from "./SiteText.jsx";
+
+function onRouteImgError(e, itemId) {
+  const el = e.currentTarget;
+  if (el.dataset.fallbackApplied) return;
+  el.dataset.fallbackApplied = "1";
+  const apiSrc = `/api/route-place-photo?id=${encodeURIComponent(itemId)}`;
+  if (el.src.includes("/api/route-place-photo")) {
+    el.src = ROUTE_IMAGE_FALLBACK;
+    return;
+  }
+  el.src = apiSrc;
+}
 
 export function RoutesFuelSection({ t }) {
   const copy = t?.routes;
@@ -32,7 +44,7 @@ export function RoutesFuelSection({ t }) {
 
   return (
     <section id="rutas" className="public-site-section routes-fuel-section" aria-labelledby="routes-fuel-heading">
-      <div style={{ maxWidth: 960, margin: "0 auto" }}>
+      <div style={{ maxWidth: 1100, margin: "0 auto" }}>
         <div style={{ textAlign: "center", marginBottom: 48 }}>
           <div
             style={{
@@ -71,8 +83,14 @@ export function RoutesFuelSection({ t }) {
               onClick={() => setActiveId(item.id)}
               role="listitem"
             >
-              <div className="routes-dest-card__img" aria-hidden="true">
-                <img loading="lazy" src={item.images?.[0]?.src} alt="" />
+              <div className="routes-dest-card__img">
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src={routePhotoSrc(item.id)}
+                  alt={item.photoAlt || item.destination}
+                  onError={(e) => onRouteImgError(e, item.id)}
+                />
                 <div className="routes-dest-card__overlay" />
                 <div className="routes-dest-card__chips">
                   <span className="routes-chip">{item.time}</span>
@@ -91,6 +109,9 @@ export function RoutesFuelSection({ t }) {
         <p className="routes-fuel-disclaimer cormorant">
           <SiteText>{copy.disclaimer}</SiteText>
         </p>
+        {copy.photoCredit ? (
+          <p className="routes-fuel-credit">{copy.photoCredit}</p>
+        ) : null}
       </div>
 
       <dialog
@@ -115,13 +136,15 @@ export function RoutesFuelSection({ t }) {
               </button>
             </div>
 
-            <div className="routes-modal__grid">
-              <div className="routes-modal__gallery" aria-label={copy.photosAria || "Fotos del destino"}>
-                {active.images?.slice(0, 6).map((img, idx) => (
-                  <div key={`${active.id}-${idx}`} className="routes-modal__img">
-                    <img loading="lazy" src={img.src} alt={img.alt || active.destination} />
-                  </div>
-                ))}
+            <div className="routes-modal__layout">
+              <div className="routes-modal__hero">
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src={routePhotoSrc(active.id)}
+                  alt={active.photoAlt || active.destination}
+                  onError={(e) => onRouteImgError(e, active.id)}
+                />
               </div>
 
               <div className="routes-modal__side">

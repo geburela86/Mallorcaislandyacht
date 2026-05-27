@@ -348,6 +348,7 @@ const T = {
       costLabel:"Carburante (ida y vuelta)",
       openMap:"Abrir en Google Maps",
       close:"Cerrar",
+      photoCredit:"Fotos de referencia de cada destino (Google Maps / lugares públicos).",
       disclaimer:"Importes aproximados de consumo de carburante para tener referencias; el importe varía en función de la cantidad de personas a bordo, la velocidad de desplazamiento y el estado de la mar.",
     },
     policy:{

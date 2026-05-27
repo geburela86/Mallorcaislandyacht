@@ -1,5 +1,7 @@
 /** Rutas frecuentes desde El Molinar — tiempos y carburante aprox. (ida y vuelta). */
 
+export const ROUTE_IMAGE_FALLBACK = "/71A7AFB6-CBFC-41D5-885B-D1040C3437E3.webp";
+
 function buildGoogleMapsHref(query) {
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
 }
@@ -8,10 +10,9 @@ function buildGoogleMapsEmbedSrc(query) {
   return `https://www.google.com/maps?q=${encodeURIComponent(query)}&output=embed`;
 }
 
-function buildUnsplashFeaturedSrc(query) {
-  // Nota: estas URLs devuelven imágenes variables pero siempre “paradisíacas”.
-  // Si quieres imágenes fijas (siempre las mismas), sustituimos por assets en /public o URLs concretas.
-  return `https://source.unsplash.com/1600x1000/?${encodeURIComponent(query)}`;
+/** Foto local (public/routes) o API de Google Places en runtime. */
+export function routePhotoSrc(id) {
+  return `/routes/${id}.webp`;
 }
 
 export const ROUTES_FUEL_ITEMS = [
@@ -21,14 +22,11 @@ export const ROUTES_FUEL_ITEMS = [
     routeLabel: "Molinar → Catedral",
     time: "20–30 min",
     cost: "30–40 €",
-    mapsQuery: "Catedral de Mallorca",
+    mapsQuery: "Catedral de Mallorca Palma",
+    wikipediaTitle: "Palma Cathedral",
     mapsHref: buildGoogleMapsHref("Catedral de Mallorca"),
     mapsEmbedSrc: buildGoogleMapsEmbedSrc("Catedral de Mallorca"),
-    images: [
-      { src: buildUnsplashFeaturedSrc("Palma cathedral sea boat"), alt: "Catedral de Mallorca vista desde el mar" },
-      { src: buildUnsplashFeaturedSrc("Palma de Mallorca bay boat"), alt: "Bahía de Palma con barco" },
-      { src: buildUnsplashFeaturedSrc("Mallorca sunset boat"), alt: "Atardecer en Mallorca desde barco" },
-    ],
+    photoAlt: "Catedral de Mallorca vista desde el mar",
   },
   {
     id: "cala-major",
@@ -36,14 +34,12 @@ export const ROUTES_FUEL_ITEMS = [
     routeLabel: "Molinar → Cala Major",
     time: "~1 h",
     cost: "50–60 €",
-    mapsQuery: "Cala Major Mallorca",
+    mapsQuery: "Playa de Cala Major Palma",
+    wikipediaTitle: "Cala Major",
     mapsHref: buildGoogleMapsHref("Cala Major Mallorca"),
     mapsEmbedSrc: buildGoogleMapsEmbedSrc("Cala Major Mallorca"),
-    images: [
-      { src: buildUnsplashFeaturedSrc("Cala Major Mallorca crystal water"), alt: "Aguas cristalinas en Cala Major" },
-      { src: buildUnsplashFeaturedSrc("Mallorca beach swimmers crystal water"), alt: "Gente bañándose en aguas cristalinas" },
-      { src: buildUnsplashFeaturedSrc("Mallorca boat anchorage turquoise water"), alt: "Barco fondeado en aguas turquesas" },
-    ],
+    photoAlt: "Playa de Cala Major, Mallorca",
+    commonsSearch: ["Cala Major Palma", "Palma de Mallorca beach", "Mallorca turquoise cove"],
   },
   {
     id: "illetas",
@@ -51,14 +47,12 @@ export const ROUTES_FUEL_ITEMS = [
     routeLabel: "Molinar → Illetas",
     time: "~1 h",
     cost: "52–60 €",
-    mapsQuery: "Illetas Mallorca",
+    mapsQuery: "Illetas beach Calvià Mallorca",
+    wikipediaTitle: "Illetes",
     mapsHref: buildGoogleMapsHref("Illetas Mallorca"),
     mapsEmbedSrc: buildGoogleMapsEmbedSrc("Illetas Mallorca"),
-    images: [
-      { src: buildUnsplashFeaturedSrc("Illetas Mallorca turquoise water"), alt: "Aguas turquesas en Illetas" },
-      { src: buildUnsplashFeaturedSrc("Mallorca cove boat snorkeling"), alt: "Snorkel en cala con barco" },
-      { src: buildUnsplashFeaturedSrc("Mallorca coast yachts clear water"), alt: "Yates en costa de Mallorca con aguas claras" },
-    ],
+    photoAlt: "Playa de Illetas, Mallorca",
+    commonsSearch: ["Illetas Calvià", "Illetes beach", "Calvià beach Mallorca"],
   },
   {
     id: "portals-nous",
@@ -66,14 +60,11 @@ export const ROUTES_FUEL_ITEMS = [
     routeLabel: "Molinar → Portals Nous",
     time: "~1 h 20",
     cost: "70–85 €",
-    mapsQuery: "Portals Nous Mallorca",
+    mapsQuery: "Playa de Portals Nous Calvià",
+    wikipediaTitle: "Portals Nous",
     mapsHref: buildGoogleMapsHref("Portals Nous Mallorca"),
     mapsEmbedSrc: buildGoogleMapsEmbedSrc("Portals Nous Mallorca"),
-    images: [
-      { src: buildUnsplashFeaturedSrc("Portals Nous marina yachts"), alt: "Puerto deportivo y yates en Portals Nous" },
-      { src: buildUnsplashFeaturedSrc("Mallorca luxury yacht water"), alt: "Yate en Mallorca sobre el agua" },
-      { src: buildUnsplashFeaturedSrc("Mallorca cove clear water boat"), alt: "Cala de aguas claras con barco" },
-    ],
+    photoAlt: "Portals Nous y su costa",
   },
   {
     id: "calo-fort",
@@ -82,13 +73,11 @@ export const ROUTES_FUEL_ITEMS = [
     time: "~1 h 20",
     cost: "70–85 €",
     mapsQuery: "Caló des Fort Mallorca",
+    wikipediaTitle: "Caló des Fort",
     mapsHref: buildGoogleMapsHref("Caló des Fort Mallorca"),
     mapsEmbedSrc: buildGoogleMapsEmbedSrc("Caló des Fort Mallorca"),
-    images: [
-      { src: buildUnsplashFeaturedSrc("Mallorca hidden cove turquoise water"), alt: "Cala escondida de aguas turquesas" },
-      { src: buildUnsplashFeaturedSrc("Mallorca rocks clear water swim"), alt: "Baño en aguas claras junto a rocas" },
-      { src: buildUnsplashFeaturedSrc("Mallorca boat swim platform crystal"), alt: "Plataforma de baño de barco en agua cristalina" },
-    ],
+    photoAlt: "Caló des Fort, Mallorca",
+    commonsSearch: ["Caló des Fort", "Mallorca cove", "Balearic beach"],
   },
   {
     id: "cala-mosques",
@@ -96,14 +85,12 @@ export const ROUTES_FUEL_ITEMS = [
     routeLabel: "Molinar → Cala Mosques",
     time: "~1 h 45",
     cost: "85–110 €",
-    mapsQuery: "Cala Mosques Mallorca",
+    mapsQuery: "Caló de ses Mosques Mallorca",
+    wikipediaTitle: "Caló de ses Mosques",
     mapsHref: buildGoogleMapsHref("Cala Mosques Mallorca"),
     mapsEmbedSrc: buildGoogleMapsEmbedSrc("Cala Mosques Mallorca"),
-    images: [
-      { src: buildUnsplashFeaturedSrc("Mallorca wild cove crystal water"), alt: "Cala salvaje de aguas cristalinas" },
-      { src: buildUnsplashFeaturedSrc("Mallorca snorkeling clear water"), alt: "Snorkel en agua clara" },
-      { src: buildUnsplashFeaturedSrc("Mallorca boat anchored turquoise"), alt: "Barco fondeado en agua turquesa" },
-    ],
+    photoAlt: "Caló de ses Mosques, Mallorca",
+    commonsSearch: ["Caló de ses Mosques", "Mallorca cala", "Mediterranean cove"],
   },
   {
     id: "cala-vella",
@@ -112,12 +99,10 @@ export const ROUTES_FUEL_ITEMS = [
     time: "~2 h",
     cost: "100–130 €",
     mapsQuery: "Cala Vella Mallorca",
+    wikipediaTitle: "Cala Vella",
     mapsHref: buildGoogleMapsHref("Cala Vella Mallorca"),
     mapsEmbedSrc: buildGoogleMapsEmbedSrc("Cala Vella Mallorca"),
-    images: [
-      { src: buildUnsplashFeaturedSrc("Cala Vella Mallorca crystal water"), alt: "Aguas cristalinas en Cala Vella" },
-      { src: buildUnsplashFeaturedSrc("Mallorca turquoise lagoon swimmers"), alt: "Gente bañándose en agua turquesa" },
-      { src: buildUnsplashFeaturedSrc("Mallorca boat day trip clear water"), alt: "Salida en barco con aguas claras" },
-    ],
+    photoAlt: "Cala Vella, Mallorca",
+    commonsSearch: ["Cala Vella Mallorca", "Es Trenc", "Mallorca beach"],
   },
 ];
