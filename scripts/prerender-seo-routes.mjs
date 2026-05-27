@@ -176,7 +176,4 @@ function main() {
     }
   }
 
-  console.log(`prerender: wrote ${count} HTML file(s) across ${SEO_LOCALES.length} locales`);
-}
-
-main();
+  console.log(`prerender: wrote ${count
