@@ -712,11 +712,11 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:rgba(11,31,58,
 .routes-table-route{font-size:12px;font-weight:700;color:rgba(11,31,58,.58)}
 .routes-fuel-table__time,.routes-fuel-table__cost{font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
 .routes-table-cta{
-  border:none;background:transparent;padding:0;cursor:pointer;
+  display:inline-block;border:none;background:transparent;padding:0;cursor:pointer;
   font-size:12px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;
-  color:rgba(201,160,71,.95);text-align:right;white-space:nowrap;
+  color:rgba(201,160,71,.95);text-align:right;white-space:nowrap;text-decoration:none;
 }
-.routes-table-cta:hover{color:rgba(179,137,49,.98)}
+.routes-table-cta:hover{color:rgba(179,137,49,.98);text-decoration:underline}
 .routes-table-cta:focus{outline:none}
 .routes-table-cta:focus-visible{outline:3px solid rgba(201,160,71,.35);outline-offset:2px;border-radius:4px}
 
