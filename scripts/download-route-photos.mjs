@@ -1,6 +1,8 @@
 /**
- * Fotos por destino: playa/cala real (Wikimedia) + fallback chárter (mar y barcos).
- * node scripts/download-route-photos.mjs
+ * Fotos reales por destino → public/routes/{id}.webp
+ * Origen: assets del proyecto (fotos de Google Maps / usuario).
+ *
+ * Ejecutar: node scripts/download-route-photos.mjs
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -8,68 +10,53 @@ import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const PUBLIC = path.resolve(__dirname, "..", "public");
-const OUT = path.join(PUBLIC, "routes");
+const ASSETS_DIR = path.resolve(__dirname, "..", ".cursor-assets-routes");
+const PROJECT_ASSETS = path.resolve(
+  process.env.HOME || "",
+  ".cursor/projects/Users-gonzaloburela-Desktop-mallorca-yacht/assets",
+);
+const OUT = path.resolve(__dirname, "..", "public", "routes");
 
-const H = { "User-Agent": "MallorcaIslandYacht/1.0 (route photos)" };
-
-/** Wikimedia: lugar real; fallback: chárter con mar y barco. */
-const ROUTE_PHOTOS = {
-  catedral: {
-    wikimedia:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Catedral_de_Palma_de_Mallorca%2C_desde_Carrer_del_Mirador%2C_fachadas_sur_y_oeste.jpg/1280px-Catedral_de_Palma_de_Mallorca%2C_desde_Carrer_del_Mirador%2C_fachadas_sur_y_oeste.jpg",
-    fallback: "2025-02-09-15-43-10-400.webp",
-  },
-  "cala-major": {
-    wikimedia:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Cala_Major_%2876720833%29.jpeg/1280px-Cala_Major_%2876720833%29.jpeg",
-    fallback: "IMG_9829.webp",
-  },
-  illetas: {
-    wikimedia:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Playa_de_Illetes_%28Mallorca%29_%2818377602942%29.jpg/1280px-Playa_de_Illetes_%28Mallorca%29_%2818377602942%29.jpg",
-    fallback: "2025-02-09-16-53-33-313.webp",
-  },
-  "portals-nous": {
-    wikimedia:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Platja_portals_nous01.jpg/1280px-Platja_portals_nous01.jpg",
-    fallback: "51D76B7A-234C-452A-A881-91253CCA8A2F.webp",
-  },
-  "calo-fort": {
-    wikimedia:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Cala_Portals_Vells%2C_Mallorca_-_panoramio.jpg/1280px-Cala_Portals_Vells%2C_Mallorca_-_panoramio.jpg",
-    fallback: "134B2BD3-FDD8-46B3-B433-A95FDDEB2383.webp",
-  },
-  "cala-mosques": {
-    wikimedia:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Meeresbucht_Cala_Portals_Vells_II.jpg/1280px-Meeresbucht_Cala_Portals_Vells_II.jpg",
-    fallback: "F96EE50B-2EB7-4196-94C3-F62224E43D07.webp",
-  },
-  "cala-vella": {
-    wikimedia:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Cala_Fornells_Mallorca.jpg/1280px-Cala_Fornells_Mallorca.jpg",
-    fallback: "31B1B524-9D5F-41E0-837B-A4C8B8BCDCCC.webp",
-  },
+/** id → nombre de archivo en assets (fotos reales por destino). */
+const USER_ROUTE_PHOTOS = {
+  catedral: "catedral-1001f9dd-b0ab-4c83-b9dc-c662148f3740.png",
+  "cala-major": "Cala_Major-fe160d07-32ac-4e5d-ba39-5fcb1ad1069d.png",
+  illetas: "Illetas-237f8d26-3dba-4afc-8134-d6476ce19bea.png",
+  "portals-nous": "Portals_nous-05cec8c5-5110-4e2e-b245-e9f60625c0e1.png",
+  "calo-fort": "cala_fort-d4de9c4a-712a-4563-9337-dd4811b688be.png",
+  "cala-mosques": "Cala_Mosques-e2a06382-1e86-43e9-8be4-ccdbc5336ec2.png",
+  "cala-vella": "cala_vella-b7559993-c649-4100-8049-36d5cf8a4f25.png",
 };
 
-async function fetchBuffer(url) {
-  const res = await fetch(url, { headers: H });
-  if (!res.ok) throw new Error(`${res.status}`);
-  return Buffer.from(await res.arrayBuffer());
+function resolveAssetsDir() {
+  if (fs.existsSync(PROJECT_ASSETS)) return PROJECT_ASSETS;
+  if (fs.existsSync(ASSETS_DIR)) return ASSETS_DIR;
+  return null;
 }
 
-async function save(id, buf) {
+async function process(id, filename, assetsDir) {
+  const src = path.join(assetsDir, filename);
+  if (!fs.existsSync(src)) throw new Error(`No existe ${src}`);
   const out = path.join(OUT, `${id}.webp`);
-  await sharp(buf).rotate().resize({ width: 640, height: 480, fit: "cover" }).webp({ quality: 86 }).toFile(out);
-  console.log(`✓ ${id} (${Math.round(fs.statSync(out).size / 1024)} KB)`);
+  await sharp(src)
+    .rotate()
+    .resize({ width: 800, height: 600, fit: "cover" })
+    .webp({ quality: 88 })
+    .toFile(out);
+  console.log(`✓ ${id} ← ${filename} (${Math.round(fs.statSync(out).size / 1024)} KB)`);
+}
+
+const assetsDir = resolveAssetsDir();
+if (!assetsDir) {
+  console.error("No se encontró carpeta assets con fotos de rutas.");
+  process.exit(1);
 }
 
 fs.mkdirSync(OUT, { recursive: true });
-for (const [id, { wikimedia, fallback }] of Object.entries(ROUTE_PHOTOS)) {
+for (const [id, file] of Object.entries(USER_ROUTE_PHOTOS)) {
   try {
-    await save(id, await fetchBuffer(wikimedia));
-  } catch {
-    console.warn(`~ ${id}: chárter fallback`);
-    await save(id, fs.readFileSync(path.join(PUBLIC, fallback)));
+    await process(id, file, assetsDir);
+  } catch (e) {
+    console.error(`✗ ${id}: ${e.message}`);
   }
 }
