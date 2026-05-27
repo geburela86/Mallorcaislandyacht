@@ -107,7 +107,7 @@ export function RoutesFuelSection({ t }) {
           <SiteText>{copy.disclaimer}</SiteText>
         </p>
         <p className="routes-fuel-credit">
-          {copy.photoCredit || "Fotos: Wikimedia Commons (lugares reales)."}
+          {copy.photoCredit || "Fotos del chárter: mar y embarcaciones en la costa de Mallorca."}
         </p>
       </div>
     </section>
