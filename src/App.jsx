@@ -39,6 +39,7 @@ import { SeoManager } from "./components/SeoManager.jsx";
 import { FaqSection } from "./components/FaqSection.jsx";
 import { BlogArticlePage } from "./components/BlogArticlePage.jsx";
 import { GuidesSection } from "./components/GuidesSection.jsx";
+import { RoutesFuelSection } from "./components/RoutesFuelSection.jsx";
 import { SiteText } from "./components/SiteText.jsx";
 import { fleetBoatImageAlt, parseLocalePath, buildLocalizedPath, localizeHref } from "./lib/seo.js";
 import { SEO_BLOG_PATHS } from "./lib/seo-blog.js";
@@ -142,6 +143,16 @@ const T = {
       kicker:"FAQ",
       title:"Boat hire in Mallorca — common questions",
       sub:"Quick answers before you book your private charter from Palma",
+    },
+    routes:{
+      kicker:"Routes",
+      title:"Popular routes & approximate fuel cost",
+      sub:"Indicative sailing times and fuel from El Molinar (round trip)",
+      tableAria:"Frequent routes and approximate fuel consumption",
+      colRoute:"Route",
+      colTime:"Sailing time (approx., round trip)",
+      colCost:"Fuel cost (approx., round trip)",
+      disclaimer:"Approximate fuel consumption for reference only. Actual cost depends on the number of guests on board, cruising speed and sea conditions.",
     },
     policy:{
       title:"Private Charter",sub:"Your private boat charter in Mallorca — clear booking terms",
@@ -311,6 +322,16 @@ const T = {
       title:"Alquiler de barco en Mallorca — dudas habituales",
       sub:"Respuestas antes de reservar tu yacht charter desde Palma",
     },
+    routes:{
+      kicker:"Rutas",
+      title:"Rutas frecuentes y carburante aproximado",
+      sub:"Tiempos de navegación y coste orientativo desde El Molinar (ida y vuelta)",
+      tableAria:"Rutas frecuentes y consumo aproximado de carburante",
+      colRoute:"Ruta",
+      colTime:"Tiempo de navegación aprox. (ida y vuelta)",
+      colCost:"Coste carburante aprox. (ida y vuelta)",
+      disclaimer:"Importes aproximados de consumo de carburante para tener referencias; el importe varía en función de la cantidad de personas a bordo, la velocidad de desplazamiento y el estado de la mar.",
+    },
     policy:{
       title:"Chárter Privado",sub:"Tu charter náutico privado en Mallorca — condiciones de reserva claras",
       items:[
@@ -477,6 +498,16 @@ const T = {
       title:"Boot mieten auf Mallorca — häufige Fragen",
       sub:"Antworten vor Ihrer Charter-Buchung ab Palma",
     },
+    routes:{
+      kicker:"Routen",
+      title:"Häufige Routen & ungefährer Kraftstoffverbrauch",
+      sub:"Orientierungszeiten und Kraftstoff ab El Molinar (Hin- und Rückfahrt)",
+      tableAria:"Häufige Routen und ungefährer Kraftstoffverbrauch",
+      colRoute:"Route",
+      colTime:"Fahrtzeit ca. (Hin und Rück)",
+      colCost:"Kraftstoff ca. (Hin und Rück)",
+      disclaimer:"Ungefähre Kraftstoffkosten nur als Orientierung. Der tatsächliche Betrag hängt von der Personenzahl an Bord, der Reisegeschwindigkeit und dem Seegang ab.",
+    },
     policy:{
       title:"Privater Charter",sub:"Ihr privater Yachtcharter auf Mallorca — transparente Buchungsbedingungen",
       items:[
@@ -642,6 +673,16 @@ const T = {
       title:"Location de bateau à Majorque — FAQ",
       sub:"Réponses avant de réserver votre charter au départ de Palma",
     },
+    routes:{
+      kicker:"Itinéraires",
+      title:"Itinéraires fréquents & carburant approximatif",
+      sub:"Temps de navigation et coût indicatif depuis El Molinar (aller-retour)",
+      tableAria:"Itinéraires fréquents et consommation de carburant approximative",
+      colRoute:"Itinéraire",
+      colTime:"Temps de navigation env. (aller-retour)",
+      colCost:"Carburant env. (aller-retour)",
+      disclaimer:"Montants approximatifs de carburant à titre indicatif ; le coût réel varie selon le nombre de personnes à bord, la vitesse de croisière et l’état de la mer.",
+    },
     policy:{
       title:"Charter Privé",sub:"Votre charter nautique privé à Majorque — conditions de réservation claires",
       items:[
@@ -793,6 +834,16 @@ const T = {
       offer:"✦  Specialerbjudande — 25% rabatt på alla juni-bokningar  ✦",scroll:"Utforska"
     },
     fleet:{title:"Vår Flotta",sub:"Välj ditt perfekta fartyg",book:"Boka",more:"Fler Foton",empty:"Inga fartyg publicerade ännu.",emptyHint:"Lägg till båtar i Admin — de visas här automatiskt.",prevPhoto:"Föregående foto",nextPhoto:"Nästa foto"},
+    routes:{
+      kicker:"Rutter",
+      title:"Vanliga rutter & ungefärlig bränslekostnad",
+      sub:"Ungefärliga tider och bränsle från El Molinar (tur och retur)",
+      tableAria:"Vanliga rutter och ungefärlig bränsleförbrukning",
+      colRoute:"Rutt",
+      colTime:"Seglingstid ca. (tur och retur)",
+      colCost:"Bränsle ca. (tur och retur)",
+      disclaimer:"Ungefärliga bränslekostnader endast som referens. Faktisk kostnad beror på antal gäster ombord, farthastighet och sjöläge.",
+    },
     policy:{
       title:"Boknings- & Avbokningsvillkor",sub:"Tydliga villkor för din trygghet",
       items:[
@@ -7728,6 +7779,7 @@ export default function App() {
       <FleetSection t={t} lang={lang} onBook={openBook} boats={fleetForPublicWebsite} settings={settings}/>
       <GuidesSection t={t} lang={lang} />
       <PolicySection t={t}/>
+      <RoutesFuelSection t={t} />
       <FaqSection t={t} lang={lang} />
       <Suspense fallback={null}>
         <ReviewsSection t={t}/>

@@ -678,6 +678,46 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:rgba(11,31,58,
   .public-site-section{padding:72px clamp(14px,4vw,40px)}
 }
 
+/* Rutas frecuentes — tabla carburante */
+.routes-fuel-section{padding-top:clamp(48px,6vw,80px);padding-bottom:clamp(48px,6vw,88px)}
+.routes-fuel-table-wrap{border-radius:16px;padding:0;overflow:hidden;border:1px solid rgba(11,31,58,.1)}
+.routes-fuel-table{width:100%;border-collapse:collapse;font-size:14px}
+.routes-fuel-table thead{background:linear-gradient(180deg,rgba(11,31,58,.06) 0%,rgba(11,31,58,.03) 100%)}
+.routes-fuel-table th{
+  text-align:left;padding:16px 20px;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+  color:rgba(11,31,58,.58);border-bottom:1px solid rgba(11,31,58,.1)
+}
+.routes-fuel-table th:last-child,.routes-fuel-table td:last-child{text-align:right}
+.routes-fuel-table tbody tr{border-bottom:1px solid rgba(11,31,58,.07);transition:background .2s ease}
+.routes-fuel-table tbody tr:last-child{border-bottom:none}
+.routes-fuel-table tbody tr:hover{background:rgba(201,160,71,.06)}
+.routes-fuel-table td{padding:18px 20px;vertical-align:middle;color:rgba(11,31,58,.88)}
+.routes-fuel-route{font-weight:700;font-size:14px;letter-spacing:.01em;color:rgba(11,31,58,.94)}
+.routes-fuel-value{font-weight:600;font-size:14px;color:rgba(11,31,58,.88)}
+.routes-fuel-cost{font-variant-numeric:tabular-nums;color:rgba(11,31,58,.92)}
+.routes-fuel-disclaimer{
+  margin:22px auto 0;max-width:720px;text-align:center;font-size:clamp(.9rem,1.6vw,1.05rem);
+  line-height:1.75;color:rgba(11,31,58,.65);font-style:italic
+}
+@media (max-width:720px){
+  .routes-fuel-table thead{display:none}
+  .routes-fuel-table tbody tr{display:block;padding:16px 18px;border-bottom:1px solid rgba(11,31,58,.08)}
+  .routes-fuel-table tbody tr:hover{background:transparent}
+  .routes-fuel-table td{
+    display:flex;justify-content:space-between;align-items:flex-start;gap:16px;
+    padding:10px 0;border:none;text-align:right
+  }
+  .routes-fuel-table td:first-child{padding-top:0}
+  .routes-fuel-table td:last-child{padding-bottom:0}
+  .routes-fuel-table td::before{
+    content:attr(data-label);flex:1;text-align:left;font-size:10px;font-weight:800;letter-spacing:.08em;
+    text-transform:uppercase;color:rgba(11,31,58,.5);padding-top:2px
+  }
+  .routes-fuel-table td[data-label]::before{max-width:48%}
+  .routes-fuel-route{font-size:13px}
+  .routes-fuel-value{font-size:13px}
+}
+
 /* Safari Vista lector: menos señales de “artículo” (evitar <p> largos y h1+h2 tipo editorial) */
 .site-public .site-text{display:block;margin:0}
 .site-text__chunk{display:inline}
