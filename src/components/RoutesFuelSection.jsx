@@ -1,9 +1,34 @@
-import { ROUTES_FUEL_ROWS } from "../lib/routes-fuel-data.js";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { ROUTES_FUEL_ITEMS } from "../lib/routes-fuel-data.js";
 import { SiteText } from "./SiteText.jsx";
 
 export function RoutesFuelSection({ t }) {
   const copy = t?.routes;
   if (!copy) return null;
+
+  const items = useMemo(() => ROUTES_FUEL_ITEMS, []);
+  const [activeId, setActiveId] = useState(null);
+  const dialogRef = useRef(null);
+
+  const active = useMemo(() => items.find((x) => x.id === activeId) || null, [items, activeId]);
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+    if (active) {
+      if (!dialog.open) dialog.showModal();
+    } else if (dialog.open) {
+      dialog.close();
+    }
+  }, [active]);
+
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === "Escape") setActiveId(null);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
   return (
     <section id="rutas" className="public-site-section routes-fuel-section" aria-labelledby="routes-fuel-heading">
@@ -37,37 +62,102 @@ export function RoutesFuelSection({ t }) {
           <div className="gold-line" style={{ maxWidth: 300, margin: "18px auto 0" }} />
         </div>
 
-        <div className="surface routes-fuel-table-wrap" role="region" aria-label={copy.tableAria}>
-          <table className="routes-fuel-table">
-            <thead>
-              <tr>
-                <th scope="col">{copy.colRoute}</th>
-                <th scope="col">{copy.colTime}</th>
-                <th scope="col">{copy.colCost}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {ROUTES_FUEL_ROWS.map((row) => (
-                <tr key={row.route}>
-                  <td data-label={copy.colRoute}>
-                    <span className="routes-fuel-route">{row.route}</span>
-                  </td>
-                  <td data-label={copy.colTime}>
-                    <span className="routes-fuel-value">{row.time}</span>
-                  </td>
-                  <td data-label={copy.colCost}>
-                    <span className="routes-fuel-value routes-fuel-cost">{row.cost}</span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="routes-dest-grid" role="list" aria-label={copy.tableAria}>
+          {items.map((item) => (
+            <button
+              key={item.id}
+              type="button"
+              className="surface routes-dest-card"
+              onClick={() => setActiveId(item.id)}
+              role="listitem"
+            >
+              <div className="routes-dest-card__img" aria-hidden="true">
+                <img loading="lazy" src={item.images?.[0]?.src} alt="" />
+                <div className="routes-dest-card__overlay" />
+                <div className="routes-dest-card__chips">
+                  <span className="routes-chip">{item.time}</span>
+                  <span className="routes-chip routes-chip--cost">{item.cost}</span>
+                </div>
+              </div>
+              <div className="routes-dest-card__body">
+                <div className="routes-dest-card__title playfair">{item.destination}</div>
+                <div className="routes-dest-card__meta">{item.routeLabel}</div>
+                <div className="routes-dest-card__cta">{copy.open || "Ver mapa y fotos"} →</div>
+              </div>
+            </button>
+          ))}
         </div>
 
         <p className="routes-fuel-disclaimer cormorant">
           <SiteText>{copy.disclaimer}</SiteText>
         </p>
       </div>
+
+      <dialog
+        ref={dialogRef}
+        className="routes-modal"
+        aria-label={active ? `${copy.modalTitle || "Ruta"}: ${active.destination}` : copy.modalTitle || "Ruta"}
+        onClose={() => setActiveId(null)}
+        onClick={(e) => {
+          if (e.target === e.currentTarget) setActiveId(null);
+        }}
+      >
+        {active ? (
+          <div className="routes-modal__panel">
+            <div className="routes-modal__head">
+              <div>
+                <div className="routes-modal__kicker">{copy.modalKicker || "Destino"}</div>
+                <div className="routes-modal__title playfair">{active.destination}</div>
+                <div className="routes-modal__sub">{active.routeLabel}</div>
+              </div>
+              <button type="button" className="routes-modal__close" onClick={() => setActiveId(null)} aria-label={copy.close || "Cerrar"}>
+                ×
+              </button>
+            </div>
+
+            <div className="routes-modal__grid">
+              <div className="routes-modal__gallery" aria-label={copy.photosAria || "Fotos del destino"}>
+                {active.images?.slice(0, 6).map((img, idx) => (
+                  <div key={`${active.id}-${idx}`} className="routes-modal__img">
+                    <img loading="lazy" src={img.src} alt={img.alt || active.destination} />
+                  </div>
+                ))}
+              </div>
+
+              <div className="routes-modal__side">
+                <div className="routes-modal__facts">
+                  <div className="routes-fact">
+                    <div className="routes-fact__label">{copy.timeLabel || "Tiempo (ida y vuelta)"}</div>
+                    <div className="routes-fact__value">{active.time}</div>
+                  </div>
+                  <div className="routes-fact">
+                    <div className="routes-fact__label">{copy.costLabel || "Carburante (ida y vuelta)"}</div>
+                    <div className="routes-fact__value">{active.cost}</div>
+                  </div>
+                </div>
+
+                <div className="routes-modal__map">
+                  <iframe
+                    title={copy.mapTitle || "Mapa"}
+                    src={active.mapsEmbedSrc}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  />
+                </div>
+
+                <div className="routes-modal__actions">
+                  <a className="routes-btn routes-btn--primary" href={active.mapsHref} target="_blank" rel="noopener noreferrer">
+                    {copy.openMap || "Abrir en Google Maps"}
+                  </a>
+                  <button type="button" className="routes-btn" onClick={() => setActiveId(null)}>
+                    {copy.close || "Cerrar"}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : null}
+      </dialog>
     </section>
   );
 }
