@@ -10,11 +10,6 @@ function buildGoogleMapsEmbedSrc(query) {
   return `https://www.google.com/maps?q=${encodeURIComponent(query)}&output=embed`;
 }
 
-/** Foto local (public/routes) o API de Google Places en runtime. */
-export function routePhotoSrc(id) {
-  return `/routes/${id}.webp`;
-}
-
 export const ROUTES_FUEL_ITEMS = [
   {
     id: "catedral",
@@ -22,11 +17,10 @@ export const ROUTES_FUEL_ITEMS = [
     routeLabel: "Molinar → Catedral",
     time: "20–30 min",
     cost: "30–40 €",
-    mapsQuery: "Catedral de Mallorca Palma",
-    wikipediaTitle: "Palma Cathedral",
+    photoSrc: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400",
+    photoAlt: "Catedral de Mallorca",
     mapsHref: buildGoogleMapsHref("Catedral de Mallorca"),
     mapsEmbedSrc: buildGoogleMapsEmbedSrc("Catedral de Mallorca"),
-    photoAlt: "Catedral de Mallorca vista desde el mar",
   },
   {
     id: "cala-major",
@@ -34,12 +28,10 @@ export const ROUTES_FUEL_ITEMS = [
     routeLabel: "Molinar → Cala Major",
     time: "~1 h",
     cost: "50–60 €",
-    mapsQuery: "Playa de Cala Major Palma",
-    wikipediaTitle: "Cala Major",
+    photoSrc: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400",
+    photoAlt: "Playa cristalina, Cala Major",
     mapsHref: buildGoogleMapsHref("Cala Major Mallorca"),
     mapsEmbedSrc: buildGoogleMapsEmbedSrc("Cala Major Mallorca"),
-    photoAlt: "Playa de Cala Major, Mallorca",
-    commonsSearch: ["Cala Major Palma", "Palma de Mallorca beach", "Mallorca turquoise cove"],
   },
   {
     id: "illetas",
@@ -47,12 +39,10 @@ export const ROUTES_FUEL_ITEMS = [
     routeLabel: "Molinar → Illetas",
     time: "~1 h",
     cost: "52–60 €",
-    mapsQuery: "Illetas beach Calvià Mallorca",
-    wikipediaTitle: "Illetes",
+    photoSrc: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400",
+    photoAlt: "Illetas, costa de Mallorca",
     mapsHref: buildGoogleMapsHref("Illetas Mallorca"),
     mapsEmbedSrc: buildGoogleMapsEmbedSrc("Illetas Mallorca"),
-    photoAlt: "Playa de Illetas, Mallorca",
-    commonsSearch: ["Illetas Calvià", "Illetes beach", "Calvià beach Mallorca"],
   },
   {
     id: "portals-nous",
@@ -60,11 +50,10 @@ export const ROUTES_FUEL_ITEMS = [
     routeLabel: "Molinar → Portals Nous",
     time: "~1 h 20",
     cost: "70–85 €",
-    mapsQuery: "Playa de Portals Nous Calvià",
-    wikipediaTitle: "Portals Nous",
+    photoSrc: "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=400",
+    photoAlt: "Puerto y costa, Portals Nous",
     mapsHref: buildGoogleMapsHref("Portals Nous Mallorca"),
     mapsEmbedSrc: buildGoogleMapsEmbedSrc("Portals Nous Mallorca"),
-    photoAlt: "Portals Nous y su costa",
   },
   {
     id: "calo-fort",
@@ -72,12 +61,10 @@ export const ROUTES_FUEL_ITEMS = [
     routeLabel: "Molinar → Caló Fort",
     time: "~1 h 20",
     cost: "70–85 €",
-    mapsQuery: "Caló des Fort Mallorca",
-    wikipediaTitle: "Caló des Fort",
+    photoSrc: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400",
+    photoAlt: "Playa, Caló Fort",
     mapsHref: buildGoogleMapsHref("Caló des Fort Mallorca"),
     mapsEmbedSrc: buildGoogleMapsEmbedSrc("Caló des Fort Mallorca"),
-    photoAlt: "Caló des Fort, Mallorca",
-    commonsSearch: ["Caló des Fort", "Mallorca cove", "Balearic beach"],
   },
   {
     id: "cala-mosques",
@@ -85,12 +72,10 @@ export const ROUTES_FUEL_ITEMS = [
     routeLabel: "Molinar → Cala Mosques",
     time: "~1 h 45",
     cost: "85–110 €",
-    mapsQuery: "Caló de ses Mosques Mallorca",
-    wikipediaTitle: "Caló de ses Mosques",
+    photoSrc: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=400",
+    photoAlt: "Aguas azules, Cala Mosques",
     mapsHref: buildGoogleMapsHref("Cala Mosques Mallorca"),
     mapsEmbedSrc: buildGoogleMapsEmbedSrc("Cala Mosques Mallorca"),
-    photoAlt: "Caló de ses Mosques, Mallorca",
-    commonsSearch: ["Caló de ses Mosques", "Mallorca cala", "Mediterranean cove"],
   },
   {
     id: "cala-vella",
@@ -98,11 +83,9 @@ export const ROUTES_FUEL_ITEMS = [
     routeLabel: "Molinar → Cala Vella",
     time: "~2 h",
     cost: "100–130 €",
-    mapsQuery: "Cala Vella Mallorca",
-    wikipediaTitle: "Cala Vella",
+    photoSrc: "https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=400",
+    photoAlt: "Cala Vella, Mallorca",
     mapsHref: buildGoogleMapsHref("Cala Vella Mallorca"),
     mapsEmbedSrc: buildGoogleMapsEmbedSrc("Cala Vella Mallorca"),
-    photoAlt: "Cala Vella, Mallorca",
-    commonsSearch: ["Cala Vella Mallorca", "Es Trenc", "Mallorca beach"],
   },
 ];

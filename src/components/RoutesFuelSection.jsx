@@ -1,17 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ROUTE_IMAGE_FALLBACK, ROUTES_FUEL_ITEMS, routePhotoSrc } from "../lib/routes-fuel-data.js";
+import { ROUTE_IMAGE_FALLBACK, ROUTES_FUEL_ITEMS } from "../lib/routes-fuel-data.js";
 import { SiteText } from "./SiteText.jsx";
 
-function onRouteImgError(e, itemId) {
+function onRouteImgError(e) {
   const el = e.currentTarget;
   if (el.dataset.fallbackApplied) return;
   el.dataset.fallbackApplied = "1";
-  const apiSrc = `/api/route-place-photo?id=${encodeURIComponent(itemId)}`;
-  if (el.src.includes("/api/route-place-photo")) {
-    el.src = ROUTE_IMAGE_FALLBACK;
-    return;
-  }
-  el.src = apiSrc;
+  el.src = ROUTE_IMAGE_FALLBACK;
 }
 
 export function RoutesFuelSection({ t }) {
@@ -74,44 +69,61 @@ export function RoutesFuelSection({ t }) {
           <div className="gold-line" style={{ maxWidth: 300, margin: "18px auto 0" }} />
         </div>
 
-        <div className="routes-dest-grid" role="list" aria-label={copy.tableAria}>
-          {items.map((item) => (
-            <button
-              key={item.id}
-              type="button"
-              className="surface routes-dest-card"
-              onClick={() => setActiveId(item.id)}
-              role="listitem"
-            >
-              <div className="routes-dest-card__img">
-                <img
-                  loading="lazy"
-                  decoding="async"
-                  src={routePhotoSrc(item.id)}
-                  alt={item.photoAlt || item.destination}
-                  onError={(e) => onRouteImgError(e, item.id)}
-                />
-                <div className="routes-dest-card__overlay" />
-                <div className="routes-dest-card__chips">
-                  <span className="routes-chip">{item.time}</span>
-                  <span className="routes-chip routes-chip--cost">{item.cost}</span>
-                </div>
-              </div>
-              <div className="routes-dest-card__body">
-                <div className="routes-dest-card__title playfair">{item.destination}</div>
-                <div className="routes-dest-card__meta">{item.routeLabel}</div>
-                <div className="routes-dest-card__cta">{copy.open || "Ver mapa y fotos"} →</div>
-              </div>
-            </button>
-          ))}
+        <div className="surface routes-fuel-table-wrap" role="region" aria-label={copy.tableAria}>
+          <table className="routes-fuel-table">
+            <thead>
+              <tr>
+                <th scope="col">{copy.colRoute}</th>
+                <th scope="col">{copy.colTime}</th>
+                <th scope="col">{copy.colCost}</th>
+                <th scope="col" className="routes-fuel-table__action-col" />
+              </tr>
+            </thead>
+            <tbody>
+              {items.map((item) => (
+                <tr key={item.id}>
+                  <td data-label={copy.colRoute} className="routes-fuel-table__dest">
+                    <a
+                      href={item.mapsHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="routes-table-photo-link"
+                      aria-label={`${copy.openMap || "Google Maps"}: ${item.destination}`}
+                    >
+                      <img
+                        className="routes-table-photo"
+                        src={item.photoSrc}
+                        alt={item.photoAlt || item.destination}
+                        width={200}
+                        height={150}
+                        loading="lazy"
+                        decoding="async"
+                        onError={onRouteImgError}
+                      />
+                    </a>
+                    <div className="routes-table-dest playfair">{item.destination}</div>
+                    <div className="routes-table-route">{item.routeLabel}</div>
+                  </td>
+                  <td data-label={copy.colTime} className="routes-fuel-table__time">
+                    {item.time}
+                  </td>
+                  <td data-label={copy.colCost} className="routes-fuel-table__cost">
+                    {item.cost}
+                  </td>
+                  <td className="routes-fuel-table__action">
+                    <button type="button" className="routes-table-cta" onClick={() => setActiveId(item.id)}>
+                      {copy.open || "Ver mapa y fotos"} →
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
 
         <p className="routes-fuel-disclaimer cormorant">
           <SiteText>{copy.disclaimer}</SiteText>
         </p>
-        {copy.photoCredit ? (
-          <p className="routes-fuel-credit">{copy.photoCredit}</p>
-        ) : null}
       </div>
 
       <dialog
@@ -138,13 +150,15 @@ export function RoutesFuelSection({ t }) {
 
             <div className="routes-modal__layout">
               <div className="routes-modal__hero">
-                <img
-                  loading="lazy"
-                  decoding="async"
-                  src={routePhotoSrc(active.id)}
-                  alt={active.photoAlt || active.destination}
-                  onError={(e) => onRouteImgError(e, active.id)}
-                />
+                <a href={active.mapsHref} target="_blank" rel="noopener noreferrer" className="routes-table-photo-link">
+                  <img
+                    loading="lazy"
+                    decoding="async"
+                    src={active.photoSrc}
+                    alt={active.photoAlt || active.destination}
+                    onError={onRouteImgError}
+                  />
+                </a>
               </div>
 
               <div className="routes-modal__side">
