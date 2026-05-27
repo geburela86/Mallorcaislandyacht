@@ -958,4 +958,9 @@ export function buildBlogArticleJsonLd(path, lang = "es") {
     isPartOf: { "@type": "WebSite", name: "Mallorca Island Yacht", url: SITE_ORIGIN },
     publisher: {
       "@type": "Organization",
-      name: "Mallorca
+      name: "Mallorca Island Yacht",
+      logo: { "@type": "ImageObject", url: `${SITE_ORIGIN}/icon-master.png` },
+    },
+    image: `${SITE_ORIGIN}/71A7AFB6-CBFC-41D5-885B-D1040C3437E3.webp`,
+  };
+}
