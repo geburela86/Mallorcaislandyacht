@@ -12,6 +12,8 @@ const PUBLIC = path.resolve(__dirname, "..", "public");
 
 /** Visually lossless for photos; much smaller than PNG. */
 const WEBP_QUALITY = 92;
+/** Cap longest edge — 4K phone photos are ~6 MB WebP at full res; 1920px is enough for web. */
+const MAX_EDGE = 1920;
 
 const RASTER = /\.(png|jpe?g)$/i;
 
@@ -22,10 +24,20 @@ async function convertFile(absPath) {
   const ext = path.extname(absPath);
   const webpPath = absPath.slice(0, -ext.length) + ".webp";
   const before = fs.statSync(absPath).size;
-  await sharp(absPath)
-    .rotate()
-    .webp({ quality: WEBP_QUALITY, effort: 6, smartSubsample: true })
-    .toFile(webpPath);
+  const meta = await sharp(absPath).metadata();
+  const w = meta.width ?? 0;
+  const h = meta.height ?? 0;
+  const longest = Math.max(w, h);
+  let pipeline = sharp(absPath).rotate();
+  if (longest > MAX_EDGE) {
+    pipeline = pipeline.resize({
+      width: w >= h ? MAX_EDGE : undefined,
+      height: h > w ? MAX_EDGE : undefined,
+      fit: "inside",
+      withoutEnlargement: true,
+    });
+  }
+  await pipeline.webp({ quality: WEBP_QUALITY, effort: 6, smartSubsample: true }).toFile(webpPath);
   const after = fs.statSync(webpPath).size;
   const rel = path.relative(PUBLIC, absPath);
   const pct = before > 0 ? Math.round((1 - after / before) * 100) : 0;

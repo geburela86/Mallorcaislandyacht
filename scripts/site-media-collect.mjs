@@ -2,6 +2,8 @@ import fs from "fs";
 import path from "path";
 
 const IMG = /\.(png|jpe?g|webp|gif|svg|avif|bmp)$/i;
+/** macOS/iCloud duplicate copies — skip in admin picker index. */
+const SKIP_DUP_COPY = / 2\.[^/]+$/i;
 
 /**
  * Lists image URL paths as served from site root (e.g. /imagenes/a.jpg, /assets/foo-abc.png).
@@ -30,7 +32,8 @@ export function collectImagePathsFromDirectory(rootAbs) {
       if (st.isDirectory()) {
         walk(full);
       } else if (IMG.test(name)) {
-        out.push("/" + path.relative(rootAbs, full).split(path.sep).join("/"));
+        const rel = "/" + path.relative(rootAbs, full).split(path.sep).join("/");
+        if (!SKIP_DUP_COPY.test(rel)) out.push(rel);
       }
     }
   }
