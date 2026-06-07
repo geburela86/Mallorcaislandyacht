@@ -188,7 +188,7 @@ const T = {
         {icon:"refund_full",t:"Full Refund",d:"Cancellation 20+ days before the charter, or if wind gusts exceed 25 knots preventing safe departure"},
         {icon:"refund_half",t:"50% Refund",d:"Cancellations between 19 days and 48 hours before the charter"},
         {icon:"refund_none",t:"No Refund",d:"Less than 48 hours’ notice or no-show."},
-        {icon:"included",t:"Always Included",d:"VAT · Insurance · Final cleaning · Professional skipper · Cooler"},
+        {icon:"included",t:"Always Included",d:"VAT · Insurance · Final cleaning · Professional skipper · Cooler · Paddle Surf · Sea Scooter · Snorkel Kit"},
         {icon:"excluded",t:"Not Included",d:"Fuel · Catering · Drinks · Additional extras unless previously agreed"},
         {icon:"commitment",t:"Our Commitment",d:"In case of poor weather or crew or vessel unavailability, we offer rescheduling or a full refund. If we cannot deliver the reserved vessel, we will propose another similar vessel when possible, or an immediate full refund."}
       ]
@@ -403,7 +403,7 @@ const T = {
         {icon:"refund_full",t:"Reembolso Total",d:"Cancelación con 20+ días de antelación o si el viento supera 25 nudos impidiendo la salida segura"},
         {icon:"refund_half",t:"Reembolso del 50%",d:"Cancelaciones entre 19 días y 48 horas antes del chárter"},
         {icon:"refund_none",t:"Sin Reembolso",d:"Cancelaciones con menos de 48 horas de antelación o no presentación."},
-        {icon:"included",t:"Siempre Incluido",d:"IVA · Seguro · Limpieza final · Patrón profesional · Nevera"},
+        {icon:"included",t:"Siempre Incluido",d:"IVA · Seguro · Limpieza final · Patrón profesional · Nevera · Paddle Surf · Sea Scooter · Equipo de Snorkel"},
         {icon:"excluded",t:"No Incluido",d:"Combustible · Catering · Bebidas · Extras adicionales salvo acuerdo previo"},
         {icon:"commitment",t:"Nuestro Compromiso",d:"Ante mal tiempo o la indisponibilidad de tripulación o embarcación, ofrecemos reprogramación o devolución íntegra. Si no pudiéramos cumplir con la embarcación reservada, propondremos otra embarcación similar si es posible, o el reembolso completo de forma inmediata."}
       ]
@@ -615,7 +615,7 @@ const T = {
         {icon:"refund_full",t:"Volle Erstattung",d:"Stornierung 20+ Tage vorher oder bei Windböen über 25 Knoten"},
         {icon:"refund_half",t:"50% Erstattung",d:"Stornierungen zwischen 19 Tagen und 48 Stunden vor dem Charter"},
         {icon:"refund_none",t:"Keine Erstattung",d:"Weniger als 48 Stunden Vorankündigung oder Nichterscheinen."},
-        {icon:"included",t:"Immer Inklusive",d:"MwSt. · Versicherung · Endreinigung · Skipper · Getränke & Kühlbox"},
+        {icon:"included",t:"Immer Inklusive",d:"MwSt. · Versicherung · Endreinigung · Skipper · Getränke & Kühlbox · Paddle Surf · Sea Scooter · Schnorchelausrüstung"},
         {icon:"excluded",t:"Nicht Inklusive",d:"Kraftstoff · Catering · Extras (sofern nicht vereinbart)"},
         {icon:"commitment",t:"Unser Versprechen",d:"Bei schlechtem Wetter oder Ausfall von Crew oder Schiff bieten wir Umbuchung oder volle Erstattung. Können wir das gebuchte Schiff nicht bereitstellen, schlagen wir —sofern möglich— ein vergleichbares Ersatzschiff oder eine sofortige Vollerstattung vor."}
       ]
@@ -826,7 +826,7 @@ const T = {
         {icon:"refund_full",t:"Remboursement Total",d:"Annulation 20+ jours avant, ou si vents dépassent 25 nœuds empêchant le départ"},
         {icon:"refund_half",t:"Remboursement 50%",d:"Annulations entre 19 jours et 48 heures avant le charter"},
         {icon:"refund_none",t:"Sans Remboursement",d:"Moins de 48 heures de préavis ou non-présentation."},
-        {icon:"included",t:"Toujours Inclus",d:"TVA · Assurance · Nettoyage · Skipper professionnel · Boissons & glacière"},
+        {icon:"included",t:"Toujours Inclus",d:"TVA · Assurance · Nettoyage · Skipper professionnel · Boissons & glacière · Paddle Surf · Sea Scooter · Équipement de Snorkel"},
         {icon:"excluded",t:"Non Inclus",d:"Carburant · Traiteur · Extras (sauf accord préalable)"},
         {icon:"commitment",t:"Notre Engagement",d:"En cas de mauvais temps ou d’indisponibilité de l’équipage ou du bateau, nous proposons un report ou un remboursement intégral. Si nous ne pouvons pas honorer l’embarcation réservée, nous proposerons une autre embarcation similaire lorsque c’est possible, ou un remboursement total sans délai."}
       ]
@@ -1023,7 +1023,7 @@ const T = {
         {icon:"refund_full",t:"Full Återbetalning",d:"Avbokning 20+ dagar innan, eller om vindbyar överstiger 25 knop"},
         {icon:"refund_half",t:"50% Återbetalning",d:"Avbokningar mellan 19 dagar och 48 timmar före charter"},
         {icon:"refund_none",t:"Ingen Återbetalning",d:"Mindre än 48 timmars varsel eller uteblivelse."},
-        {icon:"included",t:"Alltid Inkluderat",d:"Moms · Försäkring · Slutstädning · Skeppare · Drycker & kylbox"},
+        {icon:"included",t:"Alltid Inkluderat",d:"Moms · Försäkring · Slutstädning · Skeppare · Drycker & kylbox · Paddle Surf · Sea Scooter · Snorkelutrustning"},
         {icon:"excluded",t:"Ej Inkluderat",d:"Bränsle · Catering · Extras (om ej avtalat)"},
         {icon:"commitment",t:"Vårt Löfte",d:"Vid dåligt väder eller om besättning eller fartyg inte är tillgängligt erbjuder vi ombokning eller full återbetalning. Om vi inte kan leverera det bokade fartyget föreslår vi ett liknande fartyg när det är möjligt, eller omedelbar full återbetalning."}
       ]
