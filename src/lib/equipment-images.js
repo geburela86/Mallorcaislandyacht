@@ -1,8 +1,10 @@
-/** Public Unsplash URLs for equipment section cards. */
+import { preferWebpUrl } from "./prefer-webp-url.js";
+
+/** Equipment section card images (local + Unsplash). */
 export const EQUIPMENT_IMAGES = {
   seaScooter: {
-    src: "https://images.unsplash.com/photo-1544551763-77ef2d0cfcb3?auto=format&fit=crop&w=900&h=520&q=80",
-    alt: "Persona con sea scooter bajo el agua en aguas cristalinas",
+    src: preferWebpUrl("/IMG_1399.PNG"),
+    alt: "Sea Scooter WattSup en aguas cristalinas de Mallorca",
   },
   snorkel: {
     src: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?auto=format&fit=crop&w=900&h=520&q=80",
