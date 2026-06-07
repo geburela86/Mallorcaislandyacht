@@ -835,82 +835,84 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:rgba(11,31,58,
 .site-firestore-alert code{font-size:11px;word-break:break-all}
 
 /* Equipamiento a bordo */
-.equipment-section{
-  background:#091829;
-  color:#fff;
-  padding:clamp(72px,8vw,100px) clamp(16px,4vw,48px);
-}
 .equipment-inner{max-width:1100px;margin:0 auto}
 .equipment-header{text-align:center;margin-bottom:clamp(40px,5vw,56px)}
 .equipment-kicker{
-  font-size:10px;letter-spacing:.35em;color:rgba(201,160,71,.85);
+  font-size:10px;letter-spacing:.35em;color:rgba(11,31,58,.62);
   text-transform:uppercase;font-weight:900;margin-bottom:12px
 }
 .equipment-title{
-  font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:600;margin:0 0 10px;color:#fff
+  font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:600;margin:0 0 10px;
+  color:rgba(11,31,58,.96)
 }
 .equipment-sub{
-  font-size:clamp(.95rem,1.8vw,1.15rem);color:rgba(255,255,255,.72);margin:0;line-height:1.6
+  font-size:clamp(.95rem,1.8vw,1.2rem);color:rgba(11,31,58,.70);margin:0;line-height:1.6
 }
-.equipment-goldline{
-  height:1px;max-width:280px;margin:18px auto 0;
-  background:linear-gradient(90deg,transparent,#C9A047,transparent)
-}
-.equipment-block{margin-bottom:clamp(36px,5vw,48px)}
+.equipment-goldline{max-width:300px;margin:18px auto 0}
+.equipment-block{margin-bottom:clamp(40px,5vw,52px)}
 .equipment-block:last-child{margin-bottom:0}
 .equipment-block__title{
-  font-size:clamp(1.1rem,2vw,1.35rem);font-weight:600;margin:0 0 20px;
-  color:rgba(255,255,255,.92);text-align:center
+  font-size:clamp(1.15rem,2.2vw,1.45rem);font-weight:600;margin:0 0 24px;
+  color:rgba(11,31,58,.92);text-align:center
 }
-.equipment-grid{display:grid;gap:18px}
-.equipment-grid--included{grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
+.equipment-grid{display:grid;gap:22px}
+.equipment-grid--included{grid-template-columns:repeat(3,minmax(0,1fr))}
 .equipment-card{
-  position:relative;padding:24px 22px 22px;border-radius:16px;
-  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
-  transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease
+  overflow:hidden;padding:0;border-radius:16px;
+  background:rgba(255,255,255,.88);
+  box-shadow:0 12px 36px rgba(11,31,58,.08);
+  transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease
 }
 .equipment-card:hover{
-  transform:translateY(-3px);border-color:rgba(201,160,71,.35);
-  box-shadow:0 16px 40px rgba(0,0,0,.25)
+  transform:translateY(-4px);
+  box-shadow:0 18px 44px rgba(11,31,58,.12);
+  border-color:rgba(201,160,71,.35)
 }
 .equipment-card--featured{
-  max-width:520px;margin:0 auto;text-align:center;padding:32px 28px 28px;
-  background:linear-gradient(145deg,rgba(255,255,255,.08) 0%,rgba(201,160,71,.12) 100%);
-  border-color:rgba(201,160,71,.45)
+  max-width:640px;margin:0 auto;
+  border-color:rgba(201,160,71,.35);
+  background:linear-gradient(180deg,rgba(255,255,255,.95) 0%,rgba(255,255,255,.88) 100%)
 }
+.equipment-card__media{
+  position:relative;aspect-ratio:16/10;overflow:hidden;background:rgba(11,31,58,.06)
+}
+.equipment-card__media--featured{aspect-ratio:21/10}
+.equipment-card__media img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .35s ease
+}
+.equipment-card:hover .equipment-card__media img{transform:scale(1.04)}
+.equipment-card__body{padding:22px 24px 24px}
+.equipment-card__body--featured{text-align:center;padding:24px 28px 28px}
 .equipment-badge{
-  display:inline-block;font-size:9px;font-weight:900;letter-spacing:.2em;
-  text-transform:uppercase;padding:5px 10px;border-radius:999px;margin-bottom:14px
+  display:inline-block;font-size:9px;font-weight:900;letter-spacing:.22em;
+  text-transform:uppercase;padding:6px 12px;border-radius:999px;margin-bottom:12px
 }
-.equipment-badge--included{background:rgba(34,197,94,.18);color:#4ade80;border:1px solid rgba(74,222,128,.35)}
-.equipment-badge--extra{background:rgba(201,160,71,.18);color:#C9A047;border:1px solid rgba(201,160,71,.45)}
-.equipment-card__icon{
-  display:flex;align-items:center;justify-content:center;
-  width:52px;height:52px;border-radius:14px;margin-bottom:14px;
-  background:rgba(255,255,255,.08);color:rgba(255,255,255,.88)
+.equipment-badge--included{
+  background:rgba(34,197,94,.12);color:#15803d;border:1px solid rgba(34,197,94,.28)
 }
-.equipment-card--featured .equipment-card__icon{margin:0 auto 14px}
-.equipment-card__icon--gold{background:rgba(201,160,71,.15);color:#C9A047}
+.equipment-badge--extra{
+  background:rgba(201,160,71,.14);color:#9a7b2f;border:1px solid rgba(201,160,71,.45)
+}
 .equipment-card__title{
-  font-size:1.15rem;font-weight:600;margin:0 0 8px;line-height:1.25;color:#fff
+  font-size:clamp(1.1rem,1.8vw,1.3rem);font-weight:600;margin:0 0 8px;
+  line-height:1.25;color:rgba(11,31,58,.94)
 }
 .equipment-card__desc{
-  font-size:13px;line-height:1.65;color:rgba(255,255,255,.68);margin:0
+  font-size:13px;line-height:1.7;color:rgba(11,31,58,.68);margin:0
 }
 .equipment-cta{
-  display:inline-flex;align-items:center;justify-content:center;margin-top:18px;
-  padding:12px 24px;border-radius:10px;font-size:11px;font-weight:800;
-  letter-spacing:.1em;text-transform:uppercase;text-decoration:none;
-  color:#091829;background:linear-gradient(135deg,#d4b35c,#C9A047);
-  border:1px solid rgba(201,160,71,.6);
-  transition:transform .15s ease,box-shadow .15s ease
+  display:inline-flex;margin-top:18px;text-decoration:none;
+  font-size:12px;padding:12px 28px
 }
-.equipment-cta:hover{
-  transform:translateY(-2px);box-shadow:0 10px 28px rgba(201,160,71,.28)
+.equipment-cta--static{opacity:.85;cursor:default;pointer-events:none}
+@media (max-width:960px){
+  .equipment-grid--included{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
-.equipment-cta:focus-visible{outline:2px solid rgba(201,160,71,.55);outline-offset:3px}
-.equipment-cta--static{opacity:.85;cursor:default}
 @media (max-width:640px){
-  .equipment-card{padding:20px 18px 18px}
-  .equipment-card--featured{padding:26px 20px 24px}
+  .equipment-grid--included{grid-template-columns:1fr}
+  .equipment-card__body{padding:18px 18px 20px}
+  .equipment-card__body--featured{padding:20px 18px 22px}
+  .equipment-card__media{aspect-ratio:4/3}
+  .equipment-card__media--featured{aspect-ratio:16/10}
 }
