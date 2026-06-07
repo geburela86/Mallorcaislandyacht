@@ -7973,8 +7973,8 @@ export default function App() {
       <Suspense fallback={null}>
         <ReviewsSection t={t}/>
       </Suspense>
-      <ContactSection t={t} contactLinks={contactLinks} onBook={()=>openBook()} />
       <EquipmentSection t={t} contactLinks={contactLinks} />
+      <ContactSection t={t} contactLinks={contactLinks} onBook={()=>openBook()} />
       <Footer t={t} settings={settings} contactLinks={contactLinks} lang={lang}/>
       <FloatingBookingAccess
         t={t}

@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /booking/payment/
+Disallow: /success
+
+Sitemap: https://mallorcaislandyacht.com/sitemap.xml
