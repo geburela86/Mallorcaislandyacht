@@ -7,7 +7,7 @@ export const EQUIPMENT_IMAGES = {
     alt: "Sea Scooter WattSup en aguas cristalinas de Mallorca",
   },
   snorkel: {
-    src: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?auto=format&fit=crop&w=900&h=520&q=80",
+    src: preferWebpUrl("/IMG_1406.PNG"),
     alt: "Snorkel en mar cristalino con peces tropicales",
   },
   paddle: {
