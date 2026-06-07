@@ -7966,7 +7966,6 @@ export default function App() {
       <Navbar lang={lang} setLang={setLang} t={t} onBook={()=>openBook()} elevated={navbarElevated} homeTo={localizedHome} navigate={navigate}/>
       <Hero t={t.hero} onBook={()=>openBook()} offerText={heroOfferText} reserveOfferSlot={reserveHeroOfferSlot} heroBgSrc={bookingHeroResolved} onExploreFleet={scrollToFleet}/>
       <FleetSection t={t} lang={lang} onBook={openBook} boats={fleetForPublicWebsite} settings={settings}/>
-      <EquipmentSection t={t} contactLinks={contactLinks} />
       <GuidesSection t={t} lang={lang} />
       <PolicySection t={t}/>
       <RoutesFuelSection t={t} />
@@ -7974,6 +7973,7 @@ export default function App() {
       <Suspense fallback={null}>
         <ReviewsSection t={t}/>
       </Suspense>
+      <EquipmentSection t={t} contactLinks={contactLinks} />
       <ContactSection t={t} contactLinks={contactLinks} onBook={()=>openBook()} />
       <Footer t={t} settings={settings} contactLinks={contactLinks} lang={lang}/>
       <FloatingBookingAccess
