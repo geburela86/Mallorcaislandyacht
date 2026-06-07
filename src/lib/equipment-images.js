@@ -11,7 +11,7 @@ export const EQUIPMENT_IMAGES = {
     alt: "Snorkel en mar cristalino con peces tropicales",
   },
   paddle: {
-    src: "https://images.unsplash.com/photo-1531267248152-4d63ad6efc9d?auto=format&fit=crop&w=900&h=520&q=80",
+    src: preferWebpUrl("/IMG_1401.PNG"),
     alt: "Paddle surf en una cala tranquila de Mallorca",
   },
   drone: {
