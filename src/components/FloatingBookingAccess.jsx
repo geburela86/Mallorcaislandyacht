@@ -1,16 +1,17 @@
+import { createPortal } from "react-dom";
 import { CalendarDays } from "lucide-react";
 import { BrandWhatsAppIcon } from "../site-icons.jsx";
 
 /** Barra fija inferior: reserva online (modal) y WhatsApp para consultas/reservas. */
 export function FloatingBookingAccess({ t, contactLinks, onBook, hidden }) {
   const copy = t?.floatingAccess;
-  if (hidden || !copy) return null;
+  if (hidden || !copy || typeof document === "undefined") return null;
 
   const waHref = contactLinks?.waHref || "";
   const waMessage = String(copy.waMessage || "").trim();
   const waBookHref = waHref && waMessage ? `${waHref}?text=${encodeURIComponent(waMessage)}` : waHref;
 
-  return (
+  return createPortal(
     <div className="floating-access-bar" role="region" aria-label={copy.regionAria}>
       <div className="floating-access-bar__inner">
         <button
@@ -41,6 +42,7 @@ export function FloatingBookingAccess({ t, contactLinks, onBook, hidden }) {
           </a>
         ) : null}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
