@@ -41,6 +41,7 @@ import { BlogArticlePage } from "./components/BlogArticlePage.jsx";
 import { GuidesSection } from "./components/GuidesSection.jsx";
 import { RoutesFuelSection } from "./components/RoutesFuelSection.jsx";
 import { EquipmentSection } from "./components/EquipmentSection.jsx";
+import { FloatingBookingAccess } from "./components/FloatingBookingAccess.jsx";
 import { SiteText } from "./components/SiteText.jsx";
 import { fleetBoatImageAlt, parseLocalePath, buildLocalizedPath, localizeHref } from "./lib/seo.js";
 import { SEO_BLOG_PATHS } from "./lib/seo-blog.js";
@@ -193,6 +194,16 @@ const T = {
       ]
     },
     contact:{title:"Ready to Set Sail?",sub:"Book your exclusive charter today",wa:"WhatsApp",dep:"Departure: El Molinar, Palma",ig:"Instagram",labelEmail:"Email",socialHeading:"WhatsApp, Instagram & email",ariaWa:"Open WhatsApp chat",ariaIg:"Open Instagram profile",ariaMail:"Send email",mapsAria:"Open meeting point in Google Maps"},
+    floatingAccess:{
+      regionAria:"Quick booking access",
+      bookLabel:"Book",
+      bookSub:"Online booking",
+      bookAria:"Open online booking",
+      waLabel:"WhatsApp",
+      waSub:"Enquiries & bookings",
+      waAria:"Contact or book via WhatsApp",
+      waMessage:"Hi, I'd like to check availability and book a yacht charter in Mallorca.",
+    },
     privacy:{
       linkLabel:"Data protection",
       close:"Close",
@@ -398,6 +409,16 @@ const T = {
       ]
     },
     contact:{title:"¿Listo para Zarpar?",sub:"Reserva tu chárter exclusivo hoy",wa:"WhatsApp",dep:"Salida: El Molinar, Palma",ig:"Instagram",labelEmail:"Correo",socialHeading:"WhatsApp, Instagram y correo",ariaWa:"Abrir WhatsApp",ariaIg:"Abrir Instagram",ariaMail:"Enviar correo",mapsAria:"Abrir el punto de encuentro en Google Maps"},
+    floatingAccess:{
+      regionAria:"Acceso rápido a reserva",
+      bookLabel:"Reservar",
+      bookSub:"Reserva online",
+      bookAria:"Abrir reserva online",
+      waLabel:"WhatsApp",
+      waSub:"Consultas y reservas",
+      waAria:"Consultar o reservar por WhatsApp",
+      waMessage:"Hola, me gustaría consultar disponibilidad y reservar un chárter en Mallorca.",
+    },
     privacy:{
       linkLabel:"Protección de datos",
       close:"Cerrar",
@@ -600,6 +621,16 @@ const T = {
       ]
     },
     contact:{title:"Bereit zum Ablegen?",sub:"Buchen Sie Ihren exklusiven Charter heute",wa:"WhatsApp",dep:"Abfahrt: El Molinar, Palma",ig:"Instagram",labelEmail:"E-Mail",socialHeading:"WhatsApp, Instagram und E-Mail",ariaWa:"WhatsApp öffnen",ariaIg:"Instagram-Profil öffnen",ariaMail:"E-Mail senden",mapsAria:"Treffpunkt in Google Maps öffnen"},
+    floatingAccess:{
+      regionAria:"Schneller Buchungszugang",
+      bookLabel:"Buchen",
+      bookSub:"Online buchen",
+      bookAria:"Online-Buchung öffnen",
+      waLabel:"WhatsApp",
+      waSub:"Anfragen & Buchung",
+      waAria:"Per WhatsApp anfragen oder buchen",
+      waMessage:"Hallo, ich möchte Verfügbarkeit prüfen und einen Yachtcharter auf Mallorca buchen.",
+    },
     privacy:{
       linkLabel:"Datenschutz",
       close:"Schließen",
@@ -801,6 +832,16 @@ const T = {
       ]
     },
     contact:{title:"Prêt à Prendre la Mer ?",sub:"Réservez votre charter exclusif aujourd'hui",wa:"WhatsApp",dep:"Départ : El Molinar, Palma",ig:"Instagram",labelEmail:"E-mail",socialHeading:"WhatsApp, Instagram et e-mail",ariaWa:"Ouvrir WhatsApp",ariaIg:"Ouvrir Instagram",ariaMail:"Envoyer un e-mail",mapsAria:"Ouvrir le lieu de rendez-vous dans Google Maps"},
+    floatingAccess:{
+      regionAria:"Accès rapide à la réservation",
+      bookLabel:"Réserver",
+      bookSub:"Réservation en ligne",
+      bookAria:"Ouvrir la réservation en ligne",
+      waLabel:"WhatsApp",
+      waSub:"Questions et réservations",
+      waAria:"Contacter ou réserver via WhatsApp",
+      waMessage:"Bonjour, je souhaite vérifier la disponibilité et réserver un charter à Majorque.",
+    },
     privacy:{
       linkLabel:"Protection des données",
       close:"Fermer",
@@ -988,6 +1029,16 @@ const T = {
       ]
     },
     contact:{title:"Redo att Sätta Segel?",sub:"Boka din exklusiva charter idag",wa:"WhatsApp",dep:"Avgång: El Molinar, Palma",ig:"Instagram",labelEmail:"E-post",socialHeading:"WhatsApp, Instagram och e-post",ariaWa:"Öppna WhatsApp",ariaIg:"Öppna Instagram",ariaMail:"Skicka e-post",mapsAria:"Öppna mötesplatsen i Google Maps"},
+    floatingAccess:{
+      regionAria:"Snabb bokningsåtkomst",
+      bookLabel:"Boka",
+      bookSub:"Boka online",
+      bookAria:"Öppna onlinebokning",
+      waLabel:"WhatsApp",
+      waSub:"Frågor och bokning",
+      waAria:"Kontakta eller boka via WhatsApp",
+      waMessage:"Hej, jag vill kolla tillgänglighet och boka en yachtcharter på Mallorca.",
+    },
     privacy:{
       linkLabel:"Dataskydd",
       close:"Stäng",
@@ -7078,6 +7129,12 @@ function BlogArticleShell({
       <Navbar lang={lang} setLang={setLang} t={t} onBook={onBook} elevated={navbarElevated} homeTo={homeTo} navigate={navigate} />
       <BlogArticlePage articlePath={articlePath} lang={lang} onBook={onBook} guidesHomeTo={homeTo} />
       <Footer t={t} settings={settings} contactLinks={contactLinks} lang={lang} />
+      <FloatingBookingAccess
+        t={t}
+        contactLinks={contactLinks}
+        onBook={onBook}
+        hidden={!!bookingBoatResolved}
+      />
       {bookingBoatResolved && (
         <BookingModal
           boat={bookingBoatResolved}
@@ -7919,6 +7976,12 @@ export default function App() {
       <ContactSection t={t} contactLinks={contactLinks} onBook={()=>openBook()} />
       <EquipmentSection t={t} contactLinks={contactLinks} />
       <Footer t={t} settings={settings} contactLinks={contactLinks} lang={lang}/>
+      <FloatingBookingAccess
+        t={t}
+        contactLinks={contactLinks}
+        onBook={() => openBook()}
+        hidden={!!bookingBoatResolved}
+      />
       
       {bookingBoatResolved && (
         <BookingModal
