@@ -63,24 +63,4 @@ function walk(dir, files = []) {
 
 async function main() {
   if (!fs.existsSync(PUBLIC)) {
-    console.error("public/ not found");
-    process.exit(1);
-  }
-  const files = walk(PUBLIC);
-  if (!files.length) {
-    console.log("No PNG/JPEG files in public/");
-    return;
-  }
-  console.log(`Converting ${files.length} file(s) (WebP quality ${WEBP_QUALITY})…`);
-  for (const f of files) {
-    try {
-      await convertFile(f);
-    } catch (e) {
-      console.error(`  FAILED ${path.relative(PUBLIC, f)}:`, e?.message || e);
-      process.exitCode = 1;
-    }
-  }
-  console.log("Done.");
-}
-
-main();
+    console.error
