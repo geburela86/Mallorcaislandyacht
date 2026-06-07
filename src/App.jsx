@@ -40,6 +40,7 @@ import { FaqSection } from "./components/FaqSection.jsx";
 import { BlogArticlePage } from "./components/BlogArticlePage.jsx";
 import { GuidesSection } from "./components/GuidesSection.jsx";
 import { RoutesFuelSection } from "./components/RoutesFuelSection.jsx";
+import { EquipmentSection } from "./components/EquipmentSection.jsx";
 import { SiteText } from "./components/SiteText.jsx";
 import { fleetBoatImageAlt, parseLocalePath, buildLocalizedPath, localizeHref } from "./lib/seo.js";
 import { SEO_BLOG_PATHS } from "./lib/seo-blog.js";
@@ -143,6 +144,23 @@ const T = {
       kicker:"FAQ",
       title:"Boat hire in Mallorca — common questions",
       sub:"Quick answers before you book your private charter from Palma",
+    },
+    equipment:{
+      kicker:"Equipment",
+      title:"On-board equipment",
+      sub:"Activities and extras to make the most of your day at sea",
+      includedTitle:"Included at no extra cost",
+      extraTitle:"Optional extra",
+      badgeIncluded:"Included",
+      badgeExtra:"Extra",
+      consultPrice:"Ask for price",
+      waMessage:"Hello, I would like to ask about the price for Video & Photo with Drone.",
+      items:{
+        seaScooter:{title:"Sea Scooter WattSup",desc:"Glide through the water with ease and explore the coast."},
+        snorkel:{title:"Snorkel Kit",desc:"Mask, snorkel and fins to discover the underwater world."},
+        paddle:{title:"Paddle Surf",desc:"Stand-up paddle board for calm bays and fun on the water."},
+        drone:{title:"Video & Photo with Drone",desc:"Professional aerial footage and photos of your charter day."},
+      },
     },
     routes:{
       kicker:"Routes",
@@ -331,6 +349,23 @@ const T = {
       title:"Alquiler de barco en Mallorca — dudas habituales",
       sub:"Respuestas antes de reservar tu yacht charter desde Palma",
     },
+    equipment:{
+      kicker:"Equipamiento",
+      title:"Equipamiento a bordo",
+      sub:"Actividades y extras para disfrutar al máximo tu día en el mar",
+      includedTitle:"Incluido sin coste",
+      extraTitle:"Extra opcional",
+      badgeIncluded:"Incluido",
+      badgeExtra:"Extra",
+      consultPrice:"Consultar precio",
+      waMessage:"Hola, me gustaría consultar el precio del servicio de Vídeo y Foto con Drone.",
+      items:{
+        seaScooter:{title:"Sea Scooter WattSup",desc:"Deslízate por el agua y explora la costa con facilidad."},
+        snorkel:{title:"Equipo de Snorkel",desc:"Máscara, tubo y aletas para descubrir el fondo marino."},
+        paddle:{title:"Paddle Surf",desc:"Tabla de paddle para calas tranquilas y diversión en el agua."},
+        drone:{title:"Vídeo y Foto con Drone",desc:"Grabación y fotografía aérea profesional de tu día de chárter."},
+      },
+    },
     routes:{
       kicker:"Rutas",
       title:"Rutas frecuentes y carburante aproximado",
@@ -517,6 +552,23 @@ const T = {
       title:"Boot mieten auf Mallorca — häufige Fragen",
       sub:"Antworten vor Ihrer Charter-Buchung ab Palma",
     },
+    equipment:{
+      kicker:"Ausstattung",
+      title:"Ausstattung an Bord",
+      sub:"Aktivitäten und Extras für einen perfekten Tag auf dem Meer",
+      includedTitle:"Ohne Aufpreis inklusive",
+      extraTitle:"Optionales Extra",
+      badgeIncluded:"Inklusive",
+      badgeExtra:"Extra",
+      consultPrice:"Preis anfragen",
+      waMessage:"Hallo, ich möchte den Preis für Video & Foto mit Drohne erfragen.",
+      items:{
+        seaScooter:{title:"Sea Scooter WattSup",desc:"Gleiten Sie mühelos durchs Wasser und erkunden Sie die Küste."},
+        snorkel:{title:"Schnorchelausrüstung",desc:"Maske, Schnorchel und Flossen für die Unterwasserwelt."},
+        paddle:{title:"Paddle Surf",desc:"Stand-up-Paddle für ruhige Buchten und Spaß auf dem Wasser."},
+        drone:{title:"Video & Foto mit Drohne",desc:"Professionelle Luftaufnahmen und Fotos Ihres Charter-Tages."},
+      },
+    },
     routes:{
       kicker:"Routen",
       title:"Häufige Routen & ungefährer Kraftstoffverbrauch",
@@ -701,6 +753,23 @@ const T = {
       title:"Location de bateau à Majorque — FAQ",
       sub:"Réponses avant de réserver votre charter au départ de Palma",
     },
+    equipment:{
+      kicker:"Équipement",
+      title:"Équipement à bord",
+      sub:"Activités et extras pour profiter au maximum de votre journée en mer",
+      includedTitle:"Inclus sans frais",
+      extraTitle:"Extra optionnel",
+      badgeIncluded:"Inclus",
+      badgeExtra:"Extra",
+      consultPrice:"Demander le prix",
+      waMessage:"Bonjour, je souhaite connaître le prix du service Vidéo et Photo avec Drone.",
+      items:{
+        seaScooter:{title:"Sea Scooter WattSup",desc:"Glissez sur l'eau et explorez la côte en toute simplicité."},
+        snorkel:{title:"Équipement de Snorkel",desc:"Masque, tuba et palmes pour découvrir les fonds marins."},
+        paddle:{title:"Paddle Surf",desc:"Planche de paddle pour les criques calmes et le plaisir sur l'eau."},
+        drone:{title:"Vidéo et Photo avec Drone",desc:"Prises de vue aériennes et photos professionnelles de votre charter."},
+      },
+    },
     routes:{
       kicker:"Itinéraires",
       title:"Itinéraires fréquents & carburant approximatif",
@@ -871,6 +940,23 @@ const T = {
       offer:"✦  Specialerbjudande — 25% rabatt på alla juni-bokningar  ✦",scroll:"Utforska"
     },
     fleet:{title:"Vår Flotta",sub:"Välj ditt perfekta fartyg",book:"Boka",more:"Fler Foton",empty:"Inga fartyg publicerade ännu.",emptyHint:"Lägg till båtar i Admin — de visas här automatiskt.",prevPhoto:"Föregående foto",nextPhoto:"Nästa foto"},
+    equipment:{
+      kicker:"Utrustning",
+      title:"Utrustning ombord",
+      sub:"Aktiviteter och tillval för att få ut mesta möjliga av din dag till sjöss",
+      includedTitle:"Ingår utan extra kostnad",
+      extraTitle:"Valfritt tillval",
+      badgeIncluded:"Ingår",
+      badgeExtra:"Extra",
+      consultPrice:"Fråga om pris",
+      waMessage:"Hej, jag skulle vilja fråga om priset för Video & Foto med Drönare.",
+      items:{
+        seaScooter:{title:"Sea Scooter WattSup",desc:"Glid genom vattnet och utforska kusten med lätthet."},
+        snorkel:{title:"Snorkelutrustning",desc:"Mask, snorkel och fenor för att upptäcka undervattensvärlden."},
+        paddle:{title:"Paddle Surf",desc:"Paddleboard för lugna vikar och nöje på vattnet."},
+        drone:{title:"Video & Foto med Drönare",desc:"Professionella flygbilder och foton från din charterdag."},
+      },
+    },
     routes:{
       kicker:"Rutter",
       title:"Vanliga rutter & ungefärlig bränslekostnad",
@@ -7831,6 +7917,7 @@ export default function App() {
         <ReviewsSection t={t}/>
       </Suspense>
       <ContactSection t={t} contactLinks={contactLinks} onBook={()=>openBook()} />
+      <EquipmentSection t={t} contactLinks={contactLinks} />
       <Footer t={t} settings={settings} contactLinks={contactLinks} lang={lang}/>
       
       {bookingBoatResolved && (
