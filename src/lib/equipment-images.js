@@ -15,7 +15,7 @@ export const EQUIPMENT_IMAGES = {
     alt: "Paddle surf en una cala tranquila de Mallorca",
   },
   drone: {
-    src: "https://images.unsplash.com/photo-1571115177098-24ec42ed683d?auto=format&fit=crop&w=1200&h=560&q=80",
+    src: preferWebpUrl("/51D76B7A-234C-452A-A881-91253CCA8A2F.PNG"),
     alt: "Vista aérea de la costa de Mallorca capturada con dron",
   },
 };
