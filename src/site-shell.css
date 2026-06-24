@@ -267,6 +267,15 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:rgba(11,31,58,
   }
 }
 .site-nav-desktop-only{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:flex-end}
+.site-nav-contact-btn{
+  background:none;border:none;color:rgba(11,31,58,.72);
+  font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+  cursor:pointer;display:inline-flex;align-items:center;font-weight:700;
+  padding:8px 6px;min-height:40px;flex-shrink:0;
+  -webkit-tap-highlight-color:transparent;
+}
+.site-nav-contact-btn:hover,.site-nav-contact-btn:focus-visible{color:rgba(11,31,58,.92)}
+#fleet,#guias,#reviews,#contact{scroll-margin-top:max(96px, calc(72px + env(safe-area-inset-top, 0px)))}
 .site-nav-mobile-cta{display:none!important;align-items:center;justify-content:center}
 .site-nav-burger-btn{
   display:none;flex-shrink:0;align-items:center;justify-content:center;

@@ -3770,6 +3770,12 @@ const Navbar = ({lang,setLang,t,onBook,elevated,homeTo="/",navigate}) => {
               )}
             </div>
 
+            <button
+              type="button"
+              className="site-nav-contact-btn"
+              onClick={()=>scrollToId("contact")}
+            >{typeof t.navContact==="string" ? t.navContact : "Contact"}</button>
+
             <div className="site-nav-desktop-only">
               <button
                 type="button"
@@ -3792,13 +3798,6 @@ const Navbar = ({lang,setLang,t,onBook,elevated,homeTo="/",navigate}) => {
                 onMouseEnter={e=>{ e.currentTarget.style.color="rgba(11,31,58,.9)"; }}
                 onMouseLeave={e=>{ e.currentTarget.style.color="rgba(11,31,58,.72)"; }}
               >{t.reviewsNav || "Reviews"}</button>
-              <button
-                type="button"
-                onClick={()=>scrollToId("contact")}
-                style={{background:"none",border:"none",color:"rgba(11,31,58,.72)",fontSize:10,letterSpacing:".15em",textTransform:"uppercase",cursor:"pointer",display:"inline-flex",alignItems:"center",fontWeight:700}}
-                onMouseEnter={e=>{ e.currentTarget.style.color="rgba(11,31,58,.9)"; }}
-                onMouseLeave={e=>{ e.currentTarget.style.color="rgba(11,31,58,.72)"; }}
-              >{typeof t.navContact==="string" ? t.navContact : "Contact"}</button>
               <Link
                 to="/admin"
                 style={{background:"none",border:"none",color:"rgba(11,31,58,.55)",fontSize:10,letterSpacing:".15em",textTransform:"uppercase",cursor:"pointer",display:"inline-flex",alignItems:"center",fontWeight:700}}
